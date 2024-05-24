@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "ecommerce3d-53285",
+=======
+  "name": "ecommerce-53285",
+>>>>>>> e0427e60bb9b8ffc5f96b99048fe24b3e3190a1b
   "version": "1.0.0",
   "main": "expo/AppEntry.js",
   "scripts": {

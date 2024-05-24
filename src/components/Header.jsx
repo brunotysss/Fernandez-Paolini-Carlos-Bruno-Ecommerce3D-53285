@@ -1,4 +1,6 @@
+
 import { StyleSheet, Text, View, useWindowDimensions } from 'react-native'
+
 import React from 'react'
 import { colors } from '../constants/colors'
 
@@ -29,5 +31,6 @@ const styles = StyleSheet.create({
     color: colors.teal200,
     fontFamily: 'Josefin',
     fontSize: 16
+
   }
 })

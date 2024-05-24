@@ -24,7 +24,9 @@ const App = () => {
 
   return (
     <View style={styles.container}>
+
       <Header title={"Decoration 3D"} />
+
       {!categorySelected ? (
         <Home setCategorySelected={setCategorySelected} />
         ) : (
