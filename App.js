@@ -1,46 +1,40 @@
-import { StyleSheet, View } from "react-native"
-import Home from "./src/screens/Home"
+import {
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+} from "react-native"
 import { colors } from "./src/constants/colors"
-import Header from "./src/components/Header"
-import ItemListCategory from "./src/screens/ItemListCategory"
-import { useState } from "react"
 import { useFonts } from "expo-font"
-import * as SplashScreen from 'expo-splash-screen';
-import { useCallback } from "react"
+import Navigator from "./src/navigation/Navigator"
+import { Provider } from "react-redux"
+import store from "./src/store"
 
 const App = () => {
   const [fontsLoaded, fontError] = useFonts({
-    'Josefin': require('./assets/JosefinSans-Regular.ttf'),
-  });
+    Josefin: require("./assets/JosefinSans-Regular.ttf"),
+  })
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded || fontError) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded, fontError]);
+  if (!fontsLoaded || fontError) {
+    return null
+  }
 
-  const [categorySelected, setCategorySelected] = useState("")
-  console.log(categorySelected)
-
-  return (
-    <View style={styles.container}>
-
-      <Header title={"Decoration 3D"} />
-
-      {!categorySelected ? (
-        <Home setCategorySelected={setCategorySelected} />
-        ) : (
-        <ItemListCategory categorySelected={categorySelected} setCategorySelected ={setCategorySelected}/>
-      )}
-    </View>
-  )
+  if (fontsLoaded && !fontError) {
+    return (
+      <SafeAreaView style={styles.container}>
+          <Provider store={store}>
+          <Navigator/>
+        </Provider>
+      </SafeAreaView>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 30,
+    marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     flex: 1,
-    alignItems: "center",
+    // alignItems: "center",
     backgroundColor: colors.teal200,
   },
 })

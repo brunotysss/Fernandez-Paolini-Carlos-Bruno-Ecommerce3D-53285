@@ -18,15 +18,15 @@ const styles = StyleSheet.create({
         width: 250,
         height: 40,
         shadowColor: colors.platinum,
-        shadowOffset:{
-          width: 3,
-          height: 3,
+        shadowOffset: {
+          width: 4,
+          height: 4,
         },
-        shadowOpacity: 0.27,
+        shadowOpacity: 0.30,
         shadowRadius: 4.65,
-        elevation: 6,
-        marginBottom: 10,
-        marginTop: 10,
+        elevation: 4,
         marginRight: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })
