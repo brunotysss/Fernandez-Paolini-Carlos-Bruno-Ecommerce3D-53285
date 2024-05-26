@@ -1,9 +1,10 @@
 import { FlatList, StyleSheet, Text, View } from "react-native"
 import { colors } from "../constants/colors"
-import products from "../data/products.json"
+// import products from "../data/products.json"
 import ProductItem from "../components/ProductItem"
 import Search from "../components/Search"
 import { useState, useEffect } from "react"
+import { useGetProductsByCategoryQuery } from "../services/shopService"
 
 const ItemListCategory = ({
   setCategorySelected = () => {},
@@ -15,10 +16,13 @@ const ItemListCategory = ({
   const [error, setError] = useState("")
 
   const {category: categorySelected} = route.params
-  useEffect(() => {
-    //Products filtered by category
 
-    //No digits validation
+  const {data: productsFetched, error: errorFromFetch, isLoading} = useGetProductsByCategoryQuery(categorySelected)
+
+  //console.log(productsFetched);
+
+
+  useEffect(() => {
     const regexDigits = /\d/
     const hasDigits = regexDigits.test(keyWord)
     if (hasDigits) {
@@ -33,17 +37,14 @@ const ItemListCategory = ({
       setError("Type 3 or more characters")
       return
     }
-
-    const productsPrefiltered = products.filter(
-      (product) => product.category === categorySelected
-    )
-    //Product filtered by name
-    const productsFilter = productsPrefiltered.filter((product) =>
-      product.title.toLocaleLowerCase().includes(keyWord.toLocaleLowerCase())
-    )
-    setProductsFiltered(productsFilter)
-    setError("")
-  }, [keyWord, categorySelected])
+    if (!isLoading) {
+      const productsFilter = productsFetched.filter((product) =>
+        product.title.toLocaleLowerCase().includes(keyWord.toLocaleLowerCase())
+      )
+      setProductsFiltered(productsFilter)
+      setError("")
+    }
+  }, [keyWord, categorySelected, productsFetched, isLoading])
 
   return (
     <View style={styles.flatListContainer}>
@@ -68,7 +69,7 @@ export default ItemListCategory
 const styles = StyleSheet.create({
   flatListContainer: {
     width: "100%",
-    backgroundColor: colors.teal200,
+    backgroundColor: colors.teal400,
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",

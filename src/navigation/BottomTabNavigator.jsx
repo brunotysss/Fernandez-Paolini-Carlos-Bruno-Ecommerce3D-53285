@@ -9,7 +9,6 @@ import Header from "../components/Header"
 import { FontAwesome5, FontAwesome6 } from "@expo/vector-icons"
 import { Ionicons } from "@expo/vector-icons"
 
-
 const Tab = createBottomTabNavigator()
 
 const BottomTabNavigator = () => {
@@ -24,7 +23,7 @@ const BottomTabNavigator = () => {
             })}
         >
             <Tab.Screen
-                name="3D Dreams Tuc"
+                name="3D Dreams"
                 component={HomeStackNavigator}
                 options={{
                     tabBarIcon: ({ focused }) => {
@@ -79,7 +78,7 @@ export default BottomTabNavigator
 const styles = StyleSheet.create({
     tabBar: {
         backgroundColor: colors.teal200,
-        shadowColor: "white",
+        shadowColor: "black",
         elevation: 4,
         borderRadius: 15,
         height: 60,

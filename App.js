@@ -22,7 +22,7 @@ const App = () => {
   if (fontsLoaded && !fontError) {
     return (
       <SafeAreaView style={styles.container}>
-          <Provider store={store}>
+        <Provider store={store}>
           <Navigator/>
         </Provider>
       </SafeAreaView>

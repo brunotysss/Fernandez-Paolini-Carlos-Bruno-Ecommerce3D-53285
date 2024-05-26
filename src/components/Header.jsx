@@ -6,8 +6,6 @@ import { useSelector } from 'react-redux'
 const Header = ({route}) => {
 
   const categorySelected = useSelector(state => state.shop.value.categorySelected)
-
-  console.log(categorySelected);
   const {height, width} = useWindowDimensions()
   return (
     <View style = {styles.container}>
